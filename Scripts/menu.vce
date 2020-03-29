@@ -1,0 +1,71 @@
+# VCE 1.0
+# Menu system by AllyTally
+# https://github.com/AllyTally/VCE-tools
+
+.startloop
+if(menu_draw_bg,!=,true,@.skipdrawbg)
+drawrect(0,0,320,240,%menu_bg_r%,%menu_bg_g%,%menu_bg_b%)
+.skipdrawbg
+if(menu_draw_bg_image,!=,true,@.skipdrawbgimg)
+drawimage(0,0,%menu_bg_image_path%)
+.skipdrawbgimg
+
+if(menu_key_delay_internal,>,0,@.skip_keys)
+ifkey(left,   .dec_menu)
+ifkey(up,     .dec_menu)
+ifkey(right,  .inc_menu)
+ifkey(down,   .inc_menu)
+ifkey(action, .run_script)
+.skip_keys
+
+menu_key_delay_internal--
+
+if(menu_draw_text,!=,true,@.skipdraw)
+
+i = 0
+do(%menu_options%)
+i++
+getvar(menu_option_new,menu_option%i%)
+if(menu_selection,==,%i%,@.draw_selected)
+drawtext(0,%menu_y + (i * menu_option_offset)%,%menu_text_r%,%menu_text_g%,%menu_text_b%,true)
+%menu_prefix + menu_option_new + menu_suffix%
+.after_draw
+loop
+.skipdraw
+delay(1)
+load(@.startloop)
+
+.draw_selected
+drawtext(0,%menu_y + (i * menu_option_offset)%,%menu_selected_text_r%,%menu_selected_text_g%,%menu_selected_text_b%,true)
+%menu_selected_prefix + menu_option_new + menu_selected_suffix%
+load(@.after_draw)
+
+.dec_menu
+playef(%menu_move_noise%)
+menu_key_delay_internal = %menu_key_delay%
+menu_selection--
+if(menu_selection,<=,0,.set_to_max)
+return
+
+.set_to_max
+menu_selection = %menu_options%
+return
+
+
+.inc_menu
+playef(%menu_move_noise%)
+menu_key_delay_internal = %menu_key_delay%
+menu_selection++
+if(menu_selection,>,%menu_options%,.set_to_min)
+return
+
+.set_to_min
+menu_selection = 1
+return
+
+.run_script
+playef(%menu_selection_noise%)
+menu_key_delay_internal = %menu_key_delay%
+getvar(menu_current_script,menu_option%menu_selection%_script)
+load(%menu_current_script%)
+return
