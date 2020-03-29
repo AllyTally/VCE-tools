@@ -1,0 +1,57 @@
+# VCE 1.0
+# Menu system by AllyTally
+# https://github.com/AllyTally/VCE-tools
+
+menu_selection = 1
+
+menu_draw_bg = true
+
+menu_bg_r = 0
+menu_bg_g = 0
+menu_bg_b = 0
+
+menu_draw_bg_image = false
+menu_bg_image_path = menu.png
+
+menu_text_r = 255
+menu_text_g = 255
+menu_text_b = 255
+
+menu_selected_text_r = 255
+menu_selected_text_g = 255
+menu_selected_text_b = 255
+
+menu_prefix =
+  
+menu_suffix =
+  
+menu_selected_prefix =
+[ 
+menu_selected_suffix =
+ ]
+
+menu_options = 4
+
+menu_option1 = Test1
+menu_option2 = Test2
+menu_option3 = Test3
+menu_option4 = Test4
+
+menu_option1_script = script
+menu_option2_script = script
+menu_option3_script = script
+menu_option4_script = script
+
+menu_y = 120
+menu_option_offset = 20
+
+
+menu_key_delay = 6
+menu_key_delay_internal = %menu_key_delay%
+
+menu_move_noise = 16
+menu_selection_noise = 11
+
+menu_draw_text = true
+
+return
