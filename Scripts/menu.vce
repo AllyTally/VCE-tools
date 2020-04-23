@@ -5,10 +5,10 @@
 # https://github.com/AllyTally/VCE-tools
 
 .startloop
-if(menu_draw_bg != "true",@.skipdrawbg)
+if(menu_draw_bg == 0,@.skipdrawbg)
 drawrect(0,0,320,240,%menu_bg_r%,%menu_bg_g%,%menu_bg_b%)
 .skipdrawbg
-if(menu_draw_bg_image != "true",@.skipdrawbgimg)
+if(menu_draw_bg_image == 0,@.skipdrawbgimg)
 drawimage(0,0,%menu_bg_image_path%)
 .skipdrawbgimg
 
@@ -22,7 +22,7 @@ ifkey(action, .run_script)
 
 menu_key_delay_internal--
 
-if(menu_draw_text != "true",@.skipdraw)
+if(menu_draw_text == 0,@.skipdraw)
 
 i = 0
 do(%menu_options%)
